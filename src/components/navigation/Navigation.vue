@@ -24,10 +24,10 @@
     <RouterLink name="Playground" to="/playground"
       ><span class="pi pi-sliders-h"> </span> <span class="menu-text"> Playground</span></RouterLink
     >
-    <RouterLink name="RecentMatch" to="/recent"
+    <!--<RouterLink name="RecentMatch" to="/recent"
       ><span class="pi pi-sliders-h"> </span>
       <span class="menu-text"> Recent match</span></RouterLink
-    >
+    -->
   </nav>
 </template>
 

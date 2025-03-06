@@ -65,6 +65,7 @@
 }
 .save-Button {
   float: right;
+  margin-left: 10px;
 }
 </style>
 

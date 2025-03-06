@@ -23,30 +23,40 @@ export async function getLeagues() {
 
 export async function deleteEvent(eventId, userId) {
   return (
-    await fetch(import.meta.env.VITE_BASE_URL + `builder/delete/${eventId}`, {
+    await fetch(import.meta.env.VITE_BASE_URL + `events/delete/${eventId}`, {
       method: 'DELETE',
-      body: JSON.stringify({ userId: userId })
+      headers: {
+        Authorization: userId
+      }
     })
   ).json()
 }
 
 export async function getEvents(userId) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + 'builder/list/' + userId)).json()
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + 'events/list', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: userId
+      }
+    })
+  ).json()
 }
 
 export async function createUpdateEvent(eventId, eventName, lines, userId) {
   return (
     await fetch(
-      import.meta.env.VITE_BASE_URL + `builder/${!eventId ? 'create' : 'edit/' + eventId}`,
+      import.meta.env.VITE_BASE_URL + `events/${!eventId ? 'create' : 'edit/' + eventId}`,
       {
         method: 'POST',
         body: JSON.stringify({
-          userId: userId,
           name: eventName,
           lines
         }),
         headers: {
-          'Content-type': 'application/json; charset=UTF-8'
+          'Content-type': 'application/json; charset=UTF-8',
+          Authorization: userId
         }
       }
     )
@@ -54,39 +64,47 @@ export async function createUpdateEvent(eventId, eventName, lines, userId) {
 }
 
 export async function getEvent(id) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + `builder/odd/${id}`)).json()
+  return (await fetch(import.meta.env.VITE_BASE_URL + `events/odd/${id}`)).json()
 }
 
 export async function getEventOperations() {
-  return (await fetch(import.meta.env.VITE_BASE_URL + 'builder/operations')).json()
+  return (await fetch(import.meta.env.VITE_BASE_URL + 'events/operations')).json()
 }
 
 export async function deleteGroup(groupId, userId) {
   return (
-    await fetch(import.meta.env.VITE_BASE_URL + `builder/group/delete/${groupId}`, {
+    await fetch(import.meta.env.VITE_BASE_URL + `group/delete/${groupId}`, {
       method: 'DELETE',
-      body: JSON.stringify({ userId })
+      headers: {
+        Authorization: userId
+      }
     })
   ).json()
 }
 
 export async function getGroups(userId) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + 'builder/group/list/' + userId)).json()
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + 'group/list', {
+      headers: {
+        Authorization: userId
+      }
+    })
+  ).json()
 }
 
 export async function createUpdateGroup(groupId, groupName, selectedOdds, userId) {
   return (
     await fetch(
-      import.meta.env.VITE_BASE_URL + `builder/group/${!groupId ? 'create' : 'edit/' + groupId}`,
+      import.meta.env.VITE_BASE_URL + `group/${!groupId ? 'create' : 'edit/' + groupId}`,
       {
         method: 'POST',
         body: JSON.stringify({
-          userId: userId,
           name: groupName,
           items: selectedOdds
         }),
         headers: {
-          'Content-type': 'application/json; charset=UTF-8'
+          'Content-type': 'application/json; charset=UTF-8',
+          Authorization: userId
         }
       }
     )
@@ -94,18 +112,18 @@ export async function createUpdateGroup(groupId, groupName, selectedOdds, userId
 }
 
 export async function getGroup(id) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + `builder/group/${id}`)).json()
+  return (await fetch(import.meta.env.VITE_BASE_URL + `group/${id}`)).json()
 }
 
 export async function deletePredicted(id, userId) {
   return (
-    await fetch(import.meta.env.VITE_BASE_URL + `delete_from_results/${id}`, {
+    await fetch(import.meta.env.VITE_BASE_URL + `predicted/delete/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({
-        userId: userId,
         id
       }),
       headers: {
+        Authorization: userId,
         'Content-type': 'application/json; charset=UTF-8'
       }
     })
@@ -113,22 +131,35 @@ export async function deletePredicted(id, userId) {
 }
 
 export async function getPredicts(userId) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + 'predicts/' + userId)).json()
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + 'predicted/list', {
+      headers: {
+        Authorization: userId
+      }
+    })
+  ).json()
 }
 
 export async function getQueue(userId) {
-  return (await fetch(import.meta.env.VITE_BASE_URL + 'get_queue/' + userId)).json()
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + 'queue/', {
+      headers: {
+        Authorization: userId
+      }
+    })
+  ).json()
 }
 
 export async function deleteFromQueue(id, userId) {
   return (
-    await fetch(import.meta.env.VITE_BASE_URL + `delete_from_queue/${id}`, {
+    await fetch(import.meta.env.VITE_BASE_URL + `queue/delete/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({
         userId: userId,
         id
       }),
       headers: {
+        Authorization: userId,
         'Content-type': 'application/json; charset=UTF-8'
       }
     })
@@ -137,17 +168,17 @@ export async function deleteFromQueue(id, userId) {
 
 export async function addToQueue(homeTeam, awayTeam, groups, userId) {
   return (
-    await fetch(import.meta.env.VITE_BASE_URL + 'queue/' + userId, {
+    await fetch(import.meta.env.VITE_BASE_URL + 'queue/add', {
       method: 'POST',
       body: JSON.stringify({
-        userId,
         homeTeam,
         awayTeam,
         groups,
         status: 'queued'
       }),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-type': 'application/json; charset=UTF-8',
+        Authorization: userId
       }
     })
   ).json()

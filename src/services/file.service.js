@@ -1,9 +1,10 @@
 export function downloadFile(userId) {
-  fetch(window.apiUrl + `download/${userId}`, {
+  fetch(import.meta.env.VITE_BASE_URL + `predicted/download`, {
     method: 'POST',
     responseType: 'blob',
     headers: {
-      'Content-type': 'application/vnd.ms-excel'
+      'Content-type': 'application/vnd.ms-excel',
+      Authorization: userId
     }
   })
     .then((res) => res.blob())
