@@ -11,6 +11,8 @@ import Select from 'primevue/select'
 import Tooltip from 'primevue/tooltip'
 import ScrollPanel from 'primevue/scrollpanel'
 import InputText from 'primevue/inputtext'
+import { createVfm } from 'vue-final-modal'
+import 'vue-final-modal/style.css'
 
 import StatLine from './components/playground/StatLine.vue'
 import BetLine from './components/playground/BetLine.vue'
@@ -44,5 +46,6 @@ app.component('Navigation', Navigation)
 
 app.use(createPinia())
 app.use(router)
+app.use(createVfm())
 
 app.mount('#app')

@@ -1,6 +1,69 @@
+
 @import './base.css';
 @import 'primeicons/primeicons.css';
-@import 'variables.css';
+@import './variables.css';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@theme {
+  --spacing: 1px;
+  --color-card-100: papayawhip;
+  --color-failed-100: lightcoral;
+  --color-finished-100: lightgreen;
+  --color-in-progress-100: rgb(241, 239, 149);
+  --color-auto-100: black;
+
+  
+  --color-main-1: #d0c8c8;
+  --color-main-2: #675757;
+  --color-main-3: #2f2828;
+  --color-main-4: #3d403c;
+  --color-main-5: #70786c;
+
+  
+  --color-contrast-1: #942d00;
+  --color-contrast-2: #c34007;
+  --color-contrast-3: #c3673f;
+  --color-contrast-4: #b47b42;
+  --color-contrast-5: #9c6a6a;
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Verdana);
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Arial);
+  unicode-range: U+0061-0068;
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Courier New);
+  unicode-range: U+0069-0070;
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Arial);
+  unicode-range: U+0041-0048;
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Courier New);
+  unicode-range: U+0049-0050;
+}
+
+@font-face {
+  font-family: psyfont;
+  src: local(Courier New);
+  unicode-range: U+0030-0040;
+}
+
 
 hr {
   border: solid 1px #2e2e34;
@@ -12,9 +75,11 @@ hr {
   padding: 2rem;
   height: 100vh;
   font-weight: normal;
-  background: #1e1e25;
+  /*--color-main-4: #3d403c;
+  --color-main-5: #70786c;*/
+  background: #2f2828;
   overflow: hidden;
-  font-family: monospace;
+  font-family: psyfont;
 }
 
 ::-webkit-scrollbar {
@@ -57,4 +122,11 @@ a,
   #app {
     padding: 0 0;
   }
+}
+
+.nav-active {
+  background-color: #2e2e34 !important;
+  color: #b4ff39 !important;
+  font-weight: bold;
+  border-radius: 0.5rem;
 }

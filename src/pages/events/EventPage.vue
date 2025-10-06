@@ -1,9 +1,9 @@
 <template>
-  <div class="builder">
-    <div class="odd-name">
+  <div class="builder w-full">
+    <div class="odd-name text-left text-[20px] p-5 mb-2 text-[color:var(--text-color-contrast)] border-b-2 border-[lightslategrey]">
       Event name: <InputText type="text" v-model="oddName" />
       <Button
-        class="save-Button"
+        class="save-Button float-right ml-2"
         @click="saveOdd($event, lines)"
         size="small"
         iconPos="right"
@@ -11,7 +11,7 @@
         label="Save"
       ></Button>
       <Button
-        class="save-Button"
+        class="save-Button float-right ml-2"
         @click="cancel()"
         iconPos="right"
         label="Cancel"
@@ -20,7 +20,7 @@
         severity="contrast"
       ></Button>
     </div>
-    <div class="builder-container">
+    <div class="builder-container text-center">
       <EventBuilderLine
         v-bind:key="line.index"
         v-for="line in lines"
@@ -35,7 +35,7 @@
         v-model="lineData"
       ></EventBuilderLine>
       <Button
-        class="new-line-Button"
+        class="new-line-Button mx-auto block"
         icon="pi pi-plus"
         iconPos="right"
         label="Add new line"
@@ -44,30 +44,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.new-line-Button {
-  float: center;
-}
-.builder {
-  width: 100%;
-}
-.builder-container {
-  text-align: center;
-}
-.odd-name {
-  text-align: left;
-  font-size: 20px;
-  padding: 20px;
-  margin-bottom: 10px;
-  color: var(--text-color-contrast);
-  border-bottom: solid 2px lightslategrey;
-}
-.save-Button {
-  float: right;
-  margin-left: 10px;
-}
-</style>
 
 <script>
 import { getUserId } from '@/services/user.service'

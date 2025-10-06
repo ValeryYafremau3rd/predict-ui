@@ -1,5 +1,5 @@
 <template>
-  <div class="match-card">
+  <div class="p-20 bg-card-100 text-auto-100 text-xl my-20 mx-auto text-left  w-4/5 rounded-[10px]">
     <div>
       <div class="status" v-if="status == 'in_progress'" style="color: green">
         Processing
@@ -28,7 +28,7 @@
         iconPos="right"
       ></Button>
     </div>
-    <hr />
+    <hr class="my-10"/>
     <div class="odd-item" v-bind:key="selectedGroup._id" v-for="selectedGroup in selectedGroups">
       {{ selectedGroup.name }}
     </div>
@@ -39,12 +39,16 @@
 .failed {
   color: red;
   background-color: darksalmon;
+  background: lightcoral;
 }
 .finished {
   color: green;
   background-color: darkseagreen;
+  background: lightgreen;
 }
-
+.in-progress {
+  background: rgb(241, 239, 149);
+}
 .queued {
   color: grey;
   background-color: wheat;
@@ -72,28 +76,9 @@
 hr {
   margin-top: 10px;
 }
-.match-card {
-  padding: 20px;
-  background-color: var(--card-background-color);
-  color: var(--text-color);
-  font-size: 20px;
-  margin: 20px auto;
-  text-align: left;
-  width: 80%;
-  border-radius: 10px;
-}
 .queue_Button {
   margin-left: 20px;
   float: right;
-}
-.in-progress {
-  background: rgb(241, 239, 149);
-}
-.failed {
-  background: lightcoral;
-}
-.finished {
-  background: lightgreen;
 }
 </style>
 

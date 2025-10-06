@@ -1,11 +1,12 @@
-export function downloadFile(userId) {
+export function downloadFile(userId, payload = null) {
   fetch(import.meta.env.VITE_BASE_URL + `predicted/download`, {
     method: 'POST',
     responseType: 'blob',
     headers: {
-      'Content-type': 'application/vnd.ms-excel',
+      'Content-type': 'application/json; charset=UTF-8',
       Authorization: userId
-    }
+    },
+    body: JSON.stringify(payload || {})
   })
     .then((res) => res.blob())
     .then((blob) => {

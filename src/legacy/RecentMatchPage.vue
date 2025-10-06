@@ -10,7 +10,7 @@
         class="w-full md:w-56"
       >
         <template #option="league">
-          <span :class="[{ unstable: league.option == 'Bundesliga' }]">
+          <span>
             {{ league.option }}
           </span>
         </template></Select

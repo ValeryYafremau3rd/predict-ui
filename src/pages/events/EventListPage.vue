@@ -1,70 +1,45 @@
 <template>
-  <div class="odd-list">
-    <div class="create-button">
+  <div class="w-full ">
+    <div class="text-center py-5 bg-transparent">
       <Button
+        class="!bg-main-3 !text-main-1 !rounded-none !border-3 !border-b-5 !border-l-5 !border-contrast-2"
         @click="navigateToCreate"
         iconPos="right"
         icon="pi pi-plus"
         label="New event"
       ></Button>
     </div>
-    <div v-bind:key="line._id" v-for="line in customOdds" class="custom-odd">
-      <div class="odd-list-item">
-        {{ line.name }}
-        <Button
-          class="remove-button"
-          @click="remove($event, line._id)"
-          size="small"
-          severity="danger"
-          label="Remove"
-          iconPos="right"
-          icon="pi pi-trash"
-        ></Button>
-        <Button
-          class="edit-button"
-          @click="edit($event, line._id)"
-          size="small"
-          icon="pi pi-pen-to-square"
-          severity="secondary"
-          label="Edit"
-          iconPos="right"
-        ></Button>
+    <div class="flex flex-row items-center flex-wrap align-end">
+      <div
+        v-for="line in customOdds"
+        :key="line._id"
+        class="w-11/23 relative mb-1 bg-main-3 border-y-contrast-1 text-main-3 b-3 text-lg p-3 pl-17 m-5 flex items-left justify-between border-l-5 border-b-3 [&:nth-child(3n-2)]:border-2 [&:nth-child(3n)]:bg-main-4 [&:nth-child(3n-1)]:border-main-5 [&:nth-child(5n)]:border-main-1 [&:nth-child(5n)]:border-3 [&:nth-child(5n)]:m-[13px] [&:nth-child(5n)]:bg-main-5 [&:nth-child(7n)]:bg-contrast-2 [&:nth-child(3n-2)]:left-7 [&:nth-child(5n-4)]:right-7"
+      >
+        <span class="text-main-1 font-bold text-[17px]">{{ line.name }}</span>
+        <div class="flex gap-2">
+          <Button
+            class=" mt-1 !bg-transparent !border-none !text-main-1 !border-contrast-1 !rounded-none !border-b-5 !border-l-5"
+            @click="edit($event, line._id)"
+            size="small"
+            icon="pi pi-pen-to-square"
+            severity="secondary"
+            label="Edit"
+            iconPos="right"
+          ></Button>
+          <Button
+            class=" mt-7  !bg-contrast-1 !border-3 !border-main-4 !text-main-1 !rounded-none !border-b-5 !border-l-5"
+            @click="remove($event, line._id)"
+            size="small"
+            severity="danger"
+            label="Remove"
+            iconPos="right"
+            icon="pi pi-trash"
+          ></Button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.odd-list {
-  width: 100%;
-}
-.create-button {
-  text-align: center;
-  padding: 20px;
-  background: transparent;
-}
-.odd-list-item {
-  background-color: var(--card-background-color);
-  font-size: 18px;
-  padding: 20px;
-  margin: 10px;
-  color: var(--text-color);
-  border-radius: 10px;
-}
-.custom-odd {
-  max-width: 80%;
-  margin: auto;
-  margin-bottom: 5px;
-}
-.edit-button {
-  float: right;
-  margin-right: 10px;
-}
-.remove-button {
-  float: right;
-  margin-right: 10px;
-}
-</style>
 
 <script>
 import EventBuilderLine from '../../components/events/EventBuilderLine.vue' // remove?

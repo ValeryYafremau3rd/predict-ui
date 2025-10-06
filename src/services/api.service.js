@@ -130,6 +130,18 @@ export async function deletePredicted(id, userId) {
   ).json()
 }
 
+export async function deleteAllPredicted(userId) {
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + `predicted/delete_all`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: userId,
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+  ).json()
+}
+
 export async function getPredicts(userId) {
   return (
     await fetch(import.meta.env.VITE_BASE_URL + 'predicted/list', {
@@ -166,7 +178,22 @@ export async function deleteFromQueue(id, userId) {
   ).json()
 }
 
-export async function addToQueue(homeTeam, awayTeam, groups, userId) {
+export async function deleteAllFromQueue(userId) {
+  return (
+    await fetch(import.meta.env.VITE_BASE_URL + `queue/delete_all`, {
+      method: 'DELETE',
+      body: JSON.stringify({
+        userId
+      }),
+      headers: {
+        Authorization: userId,
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+  ).json()
+}
+
+export async function addToQueue(homeTeam, awayTeam, groups, tag, userId) {
   return (
     await fetch(import.meta.env.VITE_BASE_URL + 'queue/add', {
       method: 'POST',
@@ -174,6 +201,7 @@ export async function addToQueue(homeTeam, awayTeam, groups, userId) {
         homeTeam,
         awayTeam,
         groups,
+        tag,
         status: 'queued'
       }),
       headers: {

@@ -54,7 +54,7 @@
                   class="odd-cell"
                   :class="[
                     { 'high-rate': odd.relative_rates[i] >= 0.8 },
-                    { 'low-rate': odd.relative_rates[i] < 0.6 }
+                    { 'low-rate': odd.relative_rates[i] <0.3 }
                   ]"
                 >
                   {{ part }}
@@ -63,7 +63,7 @@
                   class="rate-cell"
                   :class="[
                     { 'high-rate': odd.relative_rates[i] >= 0.8 },
-                    { 'low-rate': odd.relative_rates[i] < 0.6 }
+                    { 'low-rate': odd.relative_rates[i] <0.3 }
                   ]"
                 >
                   {{ odd.relative_rates[i].toFixed(2) }}
@@ -80,13 +80,13 @@
             >
               <div
                 class="odd-cell"
-                :class="[{ 'high-rate': odd.rates[i] >= 0.8 }, { 'low-rate': odd.rates[i] < 0.6 }]"
+                :class="[{ 'high-rate': odd.rates[i] >= 0.8 }, { 'low-rate': odd.rates[i] <0.3 }]"
               >
                 {{ part }}
               </div>
               <div
                 class="rate-cell"
-                :class="[{ 'high-rate': odd.rates[i] >= 0.8 }, { 'low-rate': odd.rates[i] < 0.6 }]"
+                :class="[{ 'high-rate': odd.rates[i] >= 0.8 }, { 'low-rate': odd.rates[i] <0.3 }]"
               >
                 {{ odd.rates[i].toFixed(2) }}
               </div>
@@ -100,7 +100,7 @@
             {
               'high-rate': odd.rates.reduce((acc, rate) => acc + rate, 0) / odd.rates.length >= 0.8
             },
-            { 'low-rate': odd.rates.reduce((acc, rate) => acc + rate, 0) / odd.rates.length < 0.6 }
+            { 'low-rate': odd.rates.reduce((acc, rate) => acc + rate, 0) / odd.rates.length <0.3 }
           ]"
         >
           {{ (odd.rates.reduce((acc, rate) => acc + rate, 0) / odd.rates.length).toFixed(2) }}
@@ -109,6 +109,23 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['homeTeam', 'awayTeam', 'odds', 'mode', 'league', 'remove'],
+  data() {
+    return {
+      expanded: true,
+      riskColors: ['crimson', 'lightgrey', 'limegreen']
+    }
+  },
+  methods: {
+    togglePrediction() {
+      this.expanded = !this.expanded
+    }
+  }
+}
+</script>
 
 <style scoped>
 .button-block {
@@ -210,24 +227,4 @@ input {
   text-align: center;
   margin: auto;
 }
-.expand-Button {
-  margin-left: 10px;
-}
 </style>
-
-<script>
-export default {
-  props: ['homeTeam', 'awayTeam', 'odds', 'mode', 'league', 'remove'],
-  data() {
-    return {
-      expanded: true,
-      riskColors: ['crimson', 'lightgrey', 'limegreen']
-    }
-  },
-  methods: {
-    togglePrediction() {
-      this.expanded = !this.expanded
-    }
-  }
-}
-</script>

@@ -7,10 +7,10 @@
         editable
         :options="leagues"
         placeholder="League"
-        class="w-full md:w-56"
+        class="md:w-56 inline-block pl-10 h-40"
       >
         <template #option="league">
-          <span :class="[{ unstable: league.option == 'Bundesliga' }]">
+          <span>
             {{ league.option }}
           </span>
         </template></Select
@@ -22,7 +22,7 @@
           optionLabel="name"
           :options="teams"
           placeholder="Home team"
-          class="w-full md:w-56"
+          class="w-full md:w-56 h-40"
         >
           <template #option="team">
             <span :class="[{ unstable: promotedTeams.includes(team.option.id) }]">
@@ -38,7 +38,7 @@
           optionLabel="name"
           :options="teams"
           placeholder="Away team"
-          class="w-full md:w-56"
+          class="w-full md:w-56 h-40"
         >
           <template #option="team">
             <span :class="[{ unstable: promotedTeams.includes(team.option.id) }]">
@@ -46,6 +46,9 @@
             </span>
           </template></Select
         >
+      </div>
+      <div class="search-field">
+        <InputText type="text" v-model="tag" placeholder="Tags" class="h-40"/>
       </div>
       <div class="search-field">
         <Button
@@ -70,6 +73,16 @@
       </div>
     </div>
     <hr />
+      <Button
+        v-if="queue.length"
+        class="queue_Button mt-10"
+        @click="deleteAll($event)"
+        severity="danger"
+        label="Clear all"
+        icon="pi pi-trash"
+        size="small"
+        iconPos="right"
+      ></Button>
     <div class="container">
       <div v-bind:key="line" v-for="line in queue">
         <QueueCard
@@ -144,6 +157,7 @@ import { getUserId } from '../../services/user.service'
 import QueueCard from '../../components/queue/QueueCard.vue'
 import {
   deleteFromQueue,
+  deleteAllFromQueue,
   getGroups,
   getLeagues,
   getQueue,
@@ -157,6 +171,7 @@ export default {
       leagues: [],
       teams: [],
       promotedTeams: [],
+      tag: '',
       selectedLeague: null,
       selectedHomeTeam: null,
       selectedAwayTeam: null,
@@ -202,6 +217,10 @@ export default {
 
       this.done = false
     },
+    async deleteAll() {
+      if (!window.confirm('Do you want to delete all items?')) return
+      this.setQueue((await deleteAllFromQueue(getUserId())).data)
+    },
     async sendMessage() {
       this.setQueue(
         (
@@ -209,6 +228,7 @@ export default {
             this.selectedHomeTeam,
             this.selectedAwayTeam,
             this.selectedGroups,
+            this.tag,
             getUserId()
           )
         ).data

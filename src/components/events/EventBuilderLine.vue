@@ -1,11 +1,11 @@
 <template>
-  <form v-on:change="updated" class="event-form">
-    <div v-if="index != 0" class="operator">
+  <form v-on:change="updated" class="block m-auto w-4/5">
+    <div v-if="index != 0" class="m-10 p-20 text-left rounded-[10px] bg-card-100">
       <select v-model="selectedOperator">
         <option v-bind:key="x" v-for="x in operators" :value="x">{{ x }}</option>
       </select>
     </div>
-    <div class="event-builder-line">
+    <div class="text-lg text-left text-auto-100 bg-card-100 p-20 m-10 rounded-[10px]">
       <div>
         Type:
         <select v-model="selectedType">
@@ -16,7 +16,7 @@
           size="small"
           iconPos="right"
           label="Delete"
-          class="remove-line"
+          class="float-right"
           icon="pi pi-times"
           severity="danger"
           @click="removeMethod()"
@@ -41,34 +41,10 @@
 </template>
 
 <style scoped>
-.event-form {
-  display: block;
-  text-align: center;
-  margin: auto;
-  width: 80%;
-}
 
 input {
   background: var(--text-color-contrast);
   color: var(--text-color);
-}
-
-.operator {
-  margin: 10px;
-  padding: 20px;
-  text-align: left;
-  background-color: var(--card-background-color);
-  border-radius: 10px;
-}
-
-.event-builder-line {
-  font-size: 18px;
-  text-align: left;
-  color: var(--text-color);
-  background-color: var(--card-background-color);
-  padding: 20px;
-  margin: 10px;
-  border-radius: 10px;
 }
 
 select {
@@ -77,9 +53,6 @@ select {
   color: var(--text-color);
 }
 
-.remove-line {
-  float: right;
-}
 </style>
 
 <script>
